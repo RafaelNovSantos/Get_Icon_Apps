@@ -1,8 +1,8 @@
 using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
-using Microsoft.WindowsAPICodePack.Shell;
 using Shell32;
 
 namespace Get_Icon_Apps
@@ -10,11 +10,11 @@ namespace Get_Icon_Apps
     public partial class Form1 : Form
     {
         private Image originalImage;
-        private Image imageWithBackground;
-
+        private OpenFileDialog openFileDialog; // Declare openFileDialog como um campo da classe
         public Form1()
         {
             InitializeComponent();
+            openFileDialog = new OpenFileDialog(); // Inicialize no construtor
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -24,13 +24,11 @@ namespace Get_Icon_Apps
 
         private void btnSelectFile_Click(object sender, EventArgs e)
         {
-            // Permitir ao usuário selecionar um arquivo .exe ou .lnk
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Title = "Selecione um executável ou atalho",
-                Filter = "Arquivos Executáveis (*.exe)|*.exe|Atalhos (*.lnk)|*.lnk",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)
-            };
+
+            openFileDialog.Title = "Selecione um executável ou atalho";
+                openFileDialog.Filter = "Arquivos Executáveis (*.exe)|*.exe|Atalhos (*.lnk)|*.lnk";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+           
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -40,12 +38,11 @@ namespace Get_Icon_Apps
                     // Extrair o ícone
                     Icon icon = GetHighResolutionIcon(filePath);
                     originalImage = icon.ToBitmap();
-                    imageWithBackground = (Image)originalImage.Clone();
+                
 
                     // Exibir o ícone original
                     pictureBoxOriginal.Image = originalImage;
-                    pictureBoxPreview.Image = originalImage;
-                    pictureBoxWithoutBackground.Image = originalImage;
+
                 }
                 catch (Exception ex)
                 {
@@ -54,26 +51,9 @@ namespace Get_Icon_Apps
             }
         }
 
-        private void btnRemoveBackground_Click(object sender, EventArgs e)
-        {
-            // Lógica para remover o fundo preto da imagem
-            if (pictureBoxPreview.Image != null)
-            {
-                Bitmap originalBitmap = (Bitmap)pictureBoxPreview.Image;
-                Bitmap processedBitmap = RemoveBlackBackground(originalBitmap);
-                pictureBoxPreview.Image = processedBitmap;
-                pictureBoxWithoutBackground.Image = processedBitmap; // Exibir sem fundo
-            }
-        }
 
-        private void btnRestoreBackground_Click(object sender, EventArgs e)
-        {
-            // Restaurar a imagem original com o fundo
-            if (imageWithBackground != null)
-            {
-                pictureBoxWithoutBackground.Image = imageWithBackground;
-            }
-        }
+
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -84,14 +64,24 @@ namespace Get_Icon_Apps
                 DefaultExt = "png"
             };
 
+            // Se houver uma imagem original carregada, configurar o nome do arquivo padrão
+            if (pictureBoxOriginal.Image != null)
+            {
+                // Obter o nome do arquivo original sem a extensão
+                string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
+
+                // Definir o nome sugerido no SaveFileDialog
+                saveFileDialog.FileName = $"{fileNameWithoutExtension}.png"; // Ajuste para o formato desejado (PNG ou ICO)
+            }
+
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
                     // Salvar a imagem escolhida
-                    if (pictureBoxWithoutBackground.Image != null)
+                    if (pictureBoxOriginal.Image != null)
                     {
-                        pictureBoxWithoutBackground.Image.Save(saveFileDialog.FileName);
+                        pictureBoxOriginal.Image.Save(saveFileDialog.FileName);
                         MessageBox.Show($"Imagem salva em: {saveFileDialog.FileName}", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -106,6 +96,7 @@ namespace Get_Icon_Apps
             }
         }
 
+
         private Icon GetHighResolutionIcon(string filePath)
         {
             if (Path.GetExtension(filePath).ToLower() == ".lnk")
@@ -114,17 +105,17 @@ namespace Get_Icon_Apps
                 filePath = ResolveShortcut(filePath);
             }
 
-            // Obter o ícone
-            ShellObject shellObject = ShellObject.FromParsingName(filePath);
-            ShellThumbnail thumbnail = shellObject.Thumbnail;
+            // Obter o ícone diretamente do arquivo executável
+            try
+            {
+                Shell32.Shell shell = new Shell32.Shell();
+                FolderItem folderItem = shell.NameSpace(Path.GetDirectoryName(filePath)).ParseName(Path.GetFileName(filePath));
 
-            if (thumbnail != null && thumbnail.Bitmap != null)
-            {
-                return Icon.FromHandle(thumbnail.Bitmap.GetHicon());
+                return Icon.ExtractAssociatedIcon(filePath);
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception("Não foi possível extrair ícone.");
+                throw new Exception($"Não foi possível extrair ícone: {ex.Message}");
             }
         }
 
@@ -142,28 +133,6 @@ namespace Get_Icon_Apps
             throw new Exception("Falha ao resolver o atalho.");
         }
 
-        private Bitmap RemoveBlackBackground(Bitmap original)
-        {
-            Bitmap result = new Bitmap(original.Width, original.Height);
-
-            for (int x = 0; x < original.Width; x++)
-            {
-                for (int y = 0; y < original.Height; y++)
-                {
-                    Color pixelColor = original.GetPixel(x, y);
-
-                    // Se o pixel for preto, torná-lo transparente
-                    if (pixelColor.R == 0 && pixelColor.G == 0 && pixelColor.B == 0)
-                    {
-                        result.SetPixel(x, y, Color.Transparent);
-                    }
-                    else
-                    {
-                        result.SetPixel(x, y, pixelColor);
-                    }
-                }
-            }
-            return result;
-        }
+      
     }
 }

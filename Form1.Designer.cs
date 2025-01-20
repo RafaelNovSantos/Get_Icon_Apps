@@ -1,15 +1,16 @@
-﻿namespace Get_Icon_Apps
+﻿using Guna.UI2.WinForms;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace Get_Icon_Apps
 {
     partial class Form1
     {
         private System.ComponentModel.IContainer components = null;
-        private PictureBox pictureBoxOriginal;
-        private PictureBox pictureBoxPreview;
-        private PictureBox pictureBoxWithoutBackground;
-        private Button btnSelectImage;
-        private Button btnRemoveBackground;
-        private Button btnRestoreBackground;
-        private Button btnSave;
+        private Guna2PictureBox pictureBoxOriginal;
+        private Guna2Button btnSelectImage;
+        private Guna2Button btnSave;
+        private TableLayoutPanel tableLayoutPanel;
 
         protected override void Dispose(bool disposing)
         {
@@ -22,97 +23,93 @@
 
         private void InitializeComponent()
         {
-            pictureBoxOriginal = new PictureBox();
-            pictureBoxPreview = new PictureBox();
-            pictureBoxWithoutBackground = new PictureBox();
-            btnSelectImage = new Button();
-            btnRemoveBackground = new Button();
-            btnRestoreBackground = new Button();
-            btnSave = new Button();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            pictureBoxOriginal = new Guna2PictureBox();
+            btnSelectImage = new Guna2Button();
+            btnSave = new Guna2Button();
+            tableLayoutPanel = new TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)pictureBoxOriginal).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxPreview).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxWithoutBackground).BeginInit();
+            tableLayoutPanel.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBoxOriginal
             // 
-            pictureBoxOriginal.Location = new Point(9, 132);
+            pictureBoxOriginal.Anchor = AnchorStyles.None;
+            pictureBoxOriginal.BackColor = Color.Transparent;
+            pictureBoxOriginal.CustomizableEdges = customizableEdges1;
+            pictureBoxOriginal.FillColor = Color.Transparent;
+            pictureBoxOriginal.Image = (Image)resources.GetObject("pictureBoxOriginal.Image");
+            pictureBoxOriginal.ImageRotate = 0F;
+            pictureBoxOriginal.Location = new Point(115, 117);
             pictureBoxOriginal.Name = "pictureBoxOriginal";
-            pictureBoxOriginal.Size = new Size(327, 274);
+            pictureBoxOriginal.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            pictureBoxOriginal.Size = new Size(70, 65);
+            pictureBoxOriginal.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBoxOriginal.TabIndex = 0;
             pictureBoxOriginal.TabStop = false;
-            // 
-            // pictureBoxPreview
-            // 
-            pictureBoxPreview.Location = new Point(386, 233);
-            pictureBoxPreview.Name = "pictureBoxPreview";
-            pictureBoxPreview.Size = new Size(327, 274);
-            pictureBoxPreview.TabIndex = 1;
-            pictureBoxPreview.TabStop = false;
-            // 
-            // pictureBoxWithoutBackground
-            // 
-            pictureBoxWithoutBackground.Location = new Point(745, 129);
-            pictureBoxWithoutBackground.Name = "pictureBoxWithoutBackground";
-            pictureBoxWithoutBackground.Size = new Size(327, 274);
-            pictureBoxWithoutBackground.TabIndex = 2;
-            pictureBoxWithoutBackground.TabStop = false;
+            pictureBoxOriginal.WaitOnLoad = true;
             // 
             // btnSelectImage
             // 
-            btnSelectImage.Location = new Point(446, 95);
+            btnSelectImage.Anchor = AnchorStyles.None;
+            btnSelectImage.BorderRadius = 10;
+            btnSelectImage.CustomizableEdges = customizableEdges3;
+            btnSelectImage.Font = new Font("Segoe UI", 9F);
+            btnSelectImage.ForeColor = Color.White;
+            btnSelectImage.Location = new Point(50, 32);
             btnSelectImage.Name = "btnSelectImage";
-            btnSelectImage.Size = new Size(200, 30);
+            btnSelectImage.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnSelectImage.Size = new Size(200, 35);
             btnSelectImage.TabIndex = 3;
             btnSelectImage.Text = "Selecionar Imagem";
-            btnSelectImage.UseVisualStyleBackColor = true;
             btnSelectImage.Click += btnSelectFile_Click;
-            // 
-            // btnRemoveBackground
-            // 
-            btnRemoveBackground.Location = new Point(446, 131);
-            btnRemoveBackground.Name = "btnRemoveBackground";
-            btnRemoveBackground.Size = new Size(200, 30);
-            btnRemoveBackground.TabIndex = 4;
-            btnRemoveBackground.Text = "Remover Fundo";
-            btnRemoveBackground.UseVisualStyleBackColor = true;
-            btnRemoveBackground.Click += btnRemoveBackground_Click;
-            // 
-            // btnRestoreBackground
-            // 
-            btnRestoreBackground.Location = new Point(446, 167);
-            btnRestoreBackground.Name = "btnRestoreBackground";
-            btnRestoreBackground.Size = new Size(200, 30);
-            btnRestoreBackground.TabIndex = 5;
-            btnRestoreBackground.Text = "Restaurar Fundo";
-            btnRestoreBackground.UseVisualStyleBackColor = true;
-            btnRestoreBackground.Click += btnRestoreBackground_Click;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(446, 545);
+            btnSave.Anchor = AnchorStyles.None;
+            btnSave.BorderRadius = 10;
+            btnSave.CustomizableEdges = customizableEdges5;
+            btnSave.Font = new Font("Segoe UI", 9F);
+            btnSave.ForeColor = Color.White;
+            btnSave.Location = new Point(50, 232);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(200, 30);
+            btnSave.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnSave.Size = new Size(200, 35);
             btnSave.TabIndex = 6;
             btnSave.Text = "Salvar Imagem";
-            btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
+            // 
+            // tableLayoutPanel
+            // 
+            tableLayoutPanel.ColumnCount = 1;
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tableLayoutPanel.Controls.Add(pictureBoxOriginal, 0, 1);
+            tableLayoutPanel.Controls.Add(btnSelectImage, 0, 0);
+            tableLayoutPanel.Controls.Add(btnSave, 1, 2);
+            tableLayoutPanel.Dock = DockStyle.Fill;
+            tableLayoutPanel.Location = new Point(0, 0);
+            tableLayoutPanel.Name = "tableLayoutPanel";
+            tableLayoutPanel.RowCount = 3;
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
+            tableLayoutPanel.Size = new Size(300, 300);
+            tableLayoutPanel.TabIndex = 0;
             // 
             // Form1
             // 
-            ClientSize = new Size(1084, 689);
-            Controls.Add(btnSave);
-            Controls.Add(pictureBoxWithoutBackground);
-            Controls.Add(pictureBoxPreview);
-            Controls.Add(btnRestoreBackground);
-            Controls.Add(btnRemoveBackground);
-            Controls.Add(btnSelectImage);
-            Controls.Add(pictureBoxOriginal);
+            ClientSize = new Size(600, 300);
+            Controls.Add(tableLayoutPanel);
             Name = "Form1";
             Text = "Gerenciador de Ícones";
             ((System.ComponentModel.ISupportInitialize)pictureBoxOriginal).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxPreview).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxWithoutBackground).EndInit();
+            tableLayoutPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
     }
