@@ -46,7 +46,7 @@ namespace Get_Icon_Apps
             pictureBoxOriginal.FillColor = Color.Transparent;
             pictureBoxOriginal.Image = (Image)resources.GetObject("pictureBoxOriginal.Image");
             pictureBoxOriginal.ImageRotate = 0F;
-            pictureBoxOriginal.Location = new Point(115, 117);
+            pictureBoxOriginal.Location = new Point(265, 117);
             pictureBoxOriginal.Name = "pictureBoxOriginal";
             pictureBoxOriginal.ShadowDecoration.CustomizableEdges = customizableEdges2;
             pictureBoxOriginal.Size = new Size(70, 65);
@@ -62,10 +62,10 @@ namespace Get_Icon_Apps
             btnSelectImage.CustomizableEdges = customizableEdges3;
             btnSelectImage.Font = new Font("Segoe UI", 9F);
             btnSelectImage.ForeColor = Color.White;
-            btnSelectImage.Location = new Point(50, 32);
+            btnSelectImage.Location = new Point(243, 32);
             btnSelectImage.Name = "btnSelectImage";
             btnSelectImage.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnSelectImage.Size = new Size(200, 35);
+            btnSelectImage.Size = new Size(114, 35);
             btnSelectImage.TabIndex = 3;
             btnSelectImage.Text = "Selecionar Imagem";
             btnSelectImage.Click += btnSelectFile_Click;
@@ -77,21 +77,25 @@ namespace Get_Icon_Apps
             btnSave.CustomizableEdges = customizableEdges5;
             btnSave.Font = new Font("Segoe UI", 9F);
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(50, 232);
+            btnSave.Location = new Point(243, 232);
             btnSave.Name = "btnSave";
             btnSave.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnSave.Size = new Size(200, 35);
+            btnSave.Size = new Size(114, 35);
             btnSave.TabIndex = 6;
             btnSave.Text = "Salvar Imagem";
             btnSave.Click += btnSave_Click;
             // 
             // tableLayoutPanel
             // 
-            tableLayoutPanel.ColumnCount = 1;
+            tableLayoutPanel.ColumnCount = 5;
             tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
-            tableLayoutPanel.Controls.Add(pictureBoxOriginal, 0, 1);
-            tableLayoutPanel.Controls.Add(btnSelectImage, 0, 0);
-            tableLayoutPanel.Controls.Add(btnSave, 1, 2);
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tableLayoutPanel.Controls.Add(pictureBoxOriginal, 2, 1);
+            tableLayoutPanel.Controls.Add(btnSelectImage, 2, 0);
+            tableLayoutPanel.Controls.Add(btnSave, 2, 2);
             tableLayoutPanel.Dock = DockStyle.Fill;
             tableLayoutPanel.Location = new Point(0, 0);
             tableLayoutPanel.Name = "tableLayoutPanel";
@@ -99,7 +103,7 @@ namespace Get_Icon_Apps
             tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
             tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
             tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
-            tableLayoutPanel.Size = new Size(300, 300);
+            tableLayoutPanel.Size = new Size(600, 300);
             tableLayoutPanel.TabIndex = 0;
             // 
             // Form1
