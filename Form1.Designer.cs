@@ -62,12 +62,12 @@ namespace Get_Icon_Apps
             btnSelectImage.CustomizableEdges = customizableEdges3;
             btnSelectImage.Font = new Font("Segoe UI", 9F);
             btnSelectImage.ForeColor = Color.White;
-            btnSelectImage.Location = new Point(243, 32);
+            btnSelectImage.Location = new Point(243, 22);
             btnSelectImage.Name = "btnSelectImage";
             btnSelectImage.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnSelectImage.Size = new Size(114, 35);
+            btnSelectImage.Size = new Size(114, 56);
             btnSelectImage.TabIndex = 3;
-            btnSelectImage.Text = "Selecionar Imagem";
+            btnSelectImage.Text = "Selecionar Aplicativo ou atalho";
             btnSelectImage.Click += btnSelectFile_Click;
             // 
             // btnSave
